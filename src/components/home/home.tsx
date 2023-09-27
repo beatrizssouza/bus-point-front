@@ -5,7 +5,7 @@ export default function Home() {
   const zoom = 4;
   return (
     <div className="home">
-      <Wrapper apiKey={"AIzaSyB60pVEsUlslAlGoxYWJeS51iHHTIT4IoA"}>
+      <Wrapper apiKey={"AIzaSyAatpcHpS4ESRO98ikcpCuZbYFqENEhqXo"}>
         <MapComponent center={center} zoom={zoom} />
       </Wrapper>
     </div>

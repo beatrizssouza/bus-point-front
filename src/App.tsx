@@ -4,9 +4,11 @@ import Login from './components/login/login';
 import Home from './components/home/home';
 import AppBarComponent from './components/appbar/appbar';
 import FormCadastroLogin from './components/login/createUser/form';
+import { AuthProvider } from './context/resources';
 
 function App() {
   return (
+    <AuthProvider>
     <div className="App">
       <AppBarComponent />
       <Routes>
@@ -15,6 +17,7 @@ function App() {
         <Route path='/cadastro-login' element={<FormCadastroLogin/>} />
       </Routes>
     </div>
+    </AuthProvider>
   );
 }
 

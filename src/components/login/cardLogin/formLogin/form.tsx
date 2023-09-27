@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Form, Input } from "antd";
+import { DataUser } from "../../../../@types/DataUser";
+import { Context } from "../../../../context/resources";
+
 
 const onFinish = (values: any) => {
   console.log("Success:", values);
@@ -20,18 +23,16 @@ export default function FormCardLogin() {
   const name = Form.useWatch("name", form);
   const password = Form.useWatch("password", form);
 
-  //   function sendNewUser() {
-  //     const user: IUserDataPost = {
-  //       name: name,
-  //       email: email,
-  //       password: password,
-  //       phone: phone,
-  //     };
+  const { SubmitLogin } = useContext(Context)
 
-  //     LoginDataService.create(user).then((response) => {
-  //       console.log(response);
-  //     });
-  //   }
+    function sendLogin() {
+      const user: DataUser = {
+        username: name,
+        password: password,
+      };
+
+      SubmitLogin(user);
+    }
 
   return (
     <Form
@@ -70,7 +71,7 @@ export default function FormCardLogin() {
             background: "#141218",
             width: "100px"
           }}
-          href="/cadastro-login"
+          onClick={() => sendLogin()}
         >
           Entrar
         </Button>

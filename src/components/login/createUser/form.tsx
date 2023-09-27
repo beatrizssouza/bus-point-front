@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
-import IUserDataPost from "../../../@types/IUserDataPost.type";
-import LoginDataService from "../../../services/login.services";
+
 
 const onFinish = (values: any) => {
   console.log("Success:", values);
@@ -14,8 +13,7 @@ const onFinishFailed = (errorInfo: any) => {
 type FieldType = {
   name?: string;
   password?: string;
-  phone?: string;
-  email?: string;
+  username?: string;
 };
 
 export default function FormCadastroLogin() {
@@ -27,16 +25,17 @@ export default function FormCadastroLogin() {
   const phone = Form.useWatch("phone", form);
 
   function sendNewUser() {
-    const user: IUserDataPost = {
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
-    };
+    console.log("oi")
+    // const user: IUserDataPost = {
+    //   name: name,
+    //   email: email,
+    //   password: password,
+    //   phone: phone,
+    // };
 
-    LoginDataService.create(user).then((response) => {
-      console.log(response);
-    });
+    // LoginDataService.create(user).then((response) => {
+    //   console.log(response);
+    // });
   }
 
   return (
@@ -60,14 +59,6 @@ export default function FormCadastroLogin() {
       </Form.Item>
 
       <Form.Item<FieldType>
-        label="E-mail"
-        name="email"
-        rules={[{ required: true, message: "Por favor coloque o seu e-mail!" }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item<FieldType>
         label="Senha"
         name="password"
         rules={[{ required: true, message: "Coloque a sua senha!" }]}
@@ -76,10 +67,10 @@ export default function FormCadastroLogin() {
       </Form.Item>
 
       <Form.Item<FieldType>
-        label="Telefone"
-        name="phone"
+        label="username"
+        name="username"
         rules={[
-          { required: true, message: "Por favor coloque o seu telefone!" },
+          { required: true, message: "Por favor coloque o seu username!" },
         ]}
       >
         <Input />
