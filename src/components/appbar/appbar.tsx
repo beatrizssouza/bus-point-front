@@ -3,9 +3,8 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import'./appbar.css';
 
@@ -22,7 +21,7 @@ export default function AppBarComponent() {
             sx={{ mr: 2 }}
             href="/"
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{fontFamily: 'Quicksand'}}>
             Bus Point
