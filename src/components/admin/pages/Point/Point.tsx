@@ -23,7 +23,7 @@ export default function Point() {
     const response = getAllListPoint();
     response.then((res) => setResponseData(res));
   }
-
+  
   function deletePointItem(id: number) {
     const response = deletePoint(id);
     window.alert(response);
@@ -91,7 +91,9 @@ export default function Point() {
                         edge="end"
                         color="inherit"
                         sx={{ mr: 2 }}
-                
+                        onClick={() => {
+                          deletePointItem(idItem);
+                        }}
                       >
                         <DeleteIcon />
                       </IconButton>
