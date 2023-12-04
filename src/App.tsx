@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/resources";
 import AdminPage from "./components/admin/admin";
 import PrivateRoute from "./utils/PrivateRoute";
 import Point from "./components/admin/pages/Point/Point";
+import Lines from "./components/admin/pages/Lines/Lines";
 
 function App() {
   return (
@@ -29,6 +30,14 @@ function App() {
             element={
               <PrivateRoute>
                 <Point />
+              </PrivateRoute>
+            }
+          />
+           <Route
+            path="/admin/lines"
+            element={
+              <PrivateRoute>
+                <Lines />
               </PrivateRoute>
             }
           />

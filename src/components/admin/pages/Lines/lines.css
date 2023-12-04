@@ -1,0 +1,28 @@
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputCreateLines{
+    margin-top: 2%;
+    margin-right: 2%;
+    display: flex;
+
+}
+
+.iconBack{
+    margin-top: 2%;
+    margin-left: 2%;
+    display: flex;
+    
+}
+
+.body{
+    display: flex;
+    justify-content: center;    
+    justify-items: center;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+}

@@ -10,12 +10,17 @@ import { DataPoint } from "../../@types/DataPoint";
 import { Context } from "../../context/resources";
 import { getAllListPoint } from "../../services/http-common";
 
+type localization = {
+  lat: number;
+  lng: number;
+};
 export default function Home() {
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const center = {
+  const [center, setCenter] = useState<localization>({
     lat: -24.044281,
     lng: -52.377591,
-  };
+  });
+
   const zoom = 4;
   const [markers, setMarkers] = useState<DataPoint[]>([]);
 
@@ -30,41 +35,39 @@ export default function Home() {
   };
 
   useEffect(() => {
-    listPoints();
-  }, []);
+    navigator.geolocation.getCurrentPosition((res) => {
+      setCenter({ lat: res.coords.latitude, lng: res.coords.longitude });
+      console.log(res.coords);
+    });
 
-  async function listPoints() {
-    const response = getAllListPoint();
-    await response.then((res) => setMarkers(res));
-  }
+    getAllListPoint().then((res) => setMarkers(res));
+  }, []);
 
   return (
     <div className="home">
-      {markers && (
-        <LoadScript
-          id="google-map-script"
-          googleMapsApiKey="AIzaSyA_Pw2JlYqi869VC-6gkM2203eo7Pqrh0c"
+      <LoadScript
+        id="google-map-script"
+        googleMapsApiKey="AIzaSyA_Pw2JlYqi869VC-6gkM2203eo7Pqrh0c"
+      >
+        <GoogleMap
+          mapContainerStyle={mapStyles}
+          center={center}
+          zoom={19}
+          onLoad={(map) => setMap(map)}
         >
-          <GoogleMap
-            mapContainerStyle={mapStyles}
-            center={center}
-            zoom={15}
-            onLoad={(map) => setMap(map)}
-          >
-            {markers.map((markers: DataPoint) => {
-              return (
-                <Marker
-                  key={markers.id}
-                  position={{
-                    lat: Number(markers.lat),
-                    lng: Number(markers.lng),
-                  }}
-                />
-              );
-            })}
-          </GoogleMap>
-        </LoadScript>
-      )}
+          {markers.map((markers: DataPoint) => {
+            return (
+              <Marker
+                key={markers.id}
+                position={{
+                  lat: Number(markers.lat),
+                  lng: Number(markers.lng),
+                }}
+              />
+            );
+          })}
+        </GoogleMap>
+      </LoadScript>
 
       <div
         style={{

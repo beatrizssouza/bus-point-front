@@ -1,6 +1,7 @@
 import axios from "axios";
 import { DataUser } from "../@types/DataUser";
 import { DataPoint } from "../@types/DataPoint";
+import { DataLines } from "../@types/DataLines";
 
 const api = axios.create({
   baseURL: `http://localhost:8081/api`,
@@ -56,6 +57,28 @@ async function deletePoint(id: number) {
     .then((response) => response.data);
 }
 
+async function getAllListLines() {
+  return await api
+    .get("/lines", {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((response) => response.data);
+}
+
+async function postCreateLine(dataLines: DataLines) {
+  await api
+    .post("/lines", dataLines, {
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((erro) => {
+      alert("Ocorreu um erro na API:\n" + erro);
+      console.log(erro);
+    });
+}
+
 async function postLogin(dataForm: DataUser) {
   try {
     const {
@@ -80,4 +103,4 @@ async function postLogin(dataForm: DataUser) {
     console.log(erro);
   }
 }
-export { postSignUp, postLogin, postCreatePoint, getAllListPoint, deletePoint };
+export { postSignUp, postLogin, postCreatePoint, getAllListPoint, deletePoint, getAllListLines , postCreateLine};
