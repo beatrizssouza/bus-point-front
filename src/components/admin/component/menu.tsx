@@ -32,7 +32,10 @@ export default function MenuItens() {
 
         <ListItemButton
           selected={selectedIndex === 1}
-          onClick={(event) => handleListItemClick(event, 1)}
+          onClick={(event) => {
+            handleListItemClick(event, 1)
+            navigate('/admin/lines')
+          }}
         >
           <ListItemText primary="Linhas" />
         </ListItemButton>

@@ -1,31 +1,25 @@
 import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import "./point.css";
-import CreatePoint from "./createPoint/CreatePoint";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, Grid, IconButton, Typography } from "@mui/material";
 
-import { getAllListPoint, deletePoint } from "../../../../services/http-common";
-import { DataPoint } from "../../../../@types/DataPoint";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getAllListLines } from "../../../../services/http-common";
+import { DataLines } from "../../../../@types/DataLines";
+import CreateLines from "./createLines/createLines";
+import "./lines.css";
 
-export default function Point() {
+export default function Lines() {
   const navigate = useNavigate();
 
   const [responseData, setResponseData] = useState([]);
 
   useEffect(() => {
-    listPoints();
+    listAllLines();
   }, []);
 
-  function listPoints() {
-    const response = getAllListPoint();
-    response.then((res) => setResponseData(res));
-  }
-
-  function deletePointItem(id: number) {
-    const response = deletePoint(id);
-    window.alert(response);
+  function listAllLines() {
+    getAllListLines().then((res) => setResponseData(res));
   }
 
   return (
@@ -45,8 +39,8 @@ export default function Point() {
             <ArrowBackIcon />
           </IconButton>
         </div>
-        <div className="inputCreatePoint">
-          <CreatePoint />
+        <div className="inputCreateLines">
+          <CreateLines />
         </div>
       </div>
       <div className="body">
@@ -55,7 +49,7 @@ export default function Point() {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {responseData.map((item: DataPoint, index) => {
+          {responseData.map((item: DataLines, index) => {
             return (
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <Card sx={{ maxWidth: 345 }}>
@@ -64,7 +58,7 @@ export default function Point() {
                       style={{
                         margin: 0,
                         display: "flex",
-                        flexDirection: "row",
+                        flexDirection: "column",
                         justifyContent: "space-between",
                       }}
                     >
@@ -74,18 +68,36 @@ export default function Point() {
                         component="div"
                         style={{ fontFamily: "Quicksand" }}
                       >
-                        {item.namePoint}
+                        {item.nameLine}
                       </Typography>
-
-                      <IconButton
-                        size="large"
-                        edge="end"
-                        color="inherit"
-                        sx={{ mr: 2 }}
-                
+                      <div
+                        style={{
+                          margin: 2,
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between"
+                        }}
                       >
-                        <DeleteIcon />
-                      </IconButton>
+                        <Typography
+                          gutterBottom
+                          component="div"
+                          style={{
+                            fontFamily: "Quicksand",
+                          }}
+                        >
+                          {item.pointIdList.map((res) => {
+                            return <li> {res} </li>;
+                          })}
+                        </Typography>
+                        <IconButton
+                          size="large"
+                          edge="end"
+                          color="inherit"
+                          sx={{ mr: 2 }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
